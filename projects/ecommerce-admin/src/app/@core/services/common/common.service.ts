@@ -72,6 +72,35 @@ export class CommonService {
     return response;
   }
 
+
+  async postData2(
+    url: string,
+    body: Object,
+    isBase64: boolean = false,
+    baseUrl: string = ''
+  ): Promise<any> {
+
+    let url1 = environment.apiBaseUrl2 + url;
+    if (baseUrl) {
+      url1 = baseUrl + url;
+    }
+
+    const response = await lastValueFrom(
+      this.httpClient.post(url1, body)
+    )
+      .then((res) => {
+          return res
+      })
+      .catch((err) => {
+        if (err?.status === 401) {
+          this.logOut();
+        }
+        console.error(err);
+      });
+
+    return response;
+  }
+
   async putData(url: string, body: Object, isBase64: boolean = true): Promise<any> {
     const encriptedbody = this.es.request_encript(body, isBase64);
 
@@ -96,13 +125,10 @@ export class CommonService {
 
   async deleteData(url: string, isBase64: boolean = true): Promise<any> {
     const response = await lastValueFrom(
-      this.httpClient.delete(environment.apiBaseUrl + url, {
-        headers: this.httpHeaders,
-        responseType: 'text',
-      })
+      this.httpClient.delete(environment.apiBaseUrl2 + url)
     )
       .then((res) => {
-        return this.es.response_decript(res);
+        return res;
       })
       .catch((err) => {
         if (err?.status === 401) {

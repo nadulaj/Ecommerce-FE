@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CategoryService } from '../../@core/services';
 import { DomainType } from '../../@core/models/types';
 import { CRUD_TYPES } from '../../keys';
-
+import * as bootstrap from 'bootstrap';
 @Component({
   selector: 'app-domains',
   templateUrl: './domains.component.html',
@@ -89,130 +89,105 @@ export class DomainsComponent implements OnInit {
       .finally(() => (this.isLoading = false));
   }
 
-  async addUpdateDomain(domain?: DomainType) {
-    // if (this.isRequesting) return;
+  async addUpdateDomain() {
+    if (this.isRequesting) return;
+console.log("hghgkhk")
+    // trigger validations
+    Object.keys(this.domainForm.controls).forEach((field) => {
+      const control = this.domainForm.get(field);
+      control?.markAllAsTouched();
+    });
 
-    // // trigger validations
-    // Object.keys(this.domainForm.controls).forEach((field) => {
-    //   const control = this.domainForm.get(field);
-    //   control?.markAllAsTouched();
-    // });
+ 
 
-    // if (!this.domainForm.valid) return;
+    // console.log(this.domainForm.value);
 
-    // // console.log(this.domainForm.value);
+    this.isRequesting = true;
+    let res = null;
+console.log(this.crudType)
+    if (this.crudType === 'Add') {
+      // add
+      let body: any = {
+        name: this.name?.value
+      };
+      res = await this.catServ.addCatgories(body);
+    } else {
+      // update
+      let body: DomainType = {
+        is_published: 1,
+      };
 
-    // this.isRequesting = true;
-    // let res = null;
+      if (this.updatingDomain?.name !== this.name?.value) {
+        body['name'] = this.name?.value;
+      }
+      // res = await this.catServ.addCatgories(body, this.id?.value);
+    }
 
-    // if (this.crudType === this.crudTypes.add) {
-    //   // add
-    //   let body: DomainType = {
-    //     name: this.name?.value,
-    //     domain: this.domain?.value,
-    //     description: this.description?.value,
-    //     is_active: this.is_active?.value === true ? 1 : 0,
-    //     is_published: 1,
-    //   };
-    //   res = await this.ds.addDomain(body);
-    // } else {
-    //   // update
-    //   let body: DomainType = {
-    //     is_published: 1,
-    //   };
+    try {
+      console.log('addUpdateDomain', res);
 
-    //   if (this.updatingDomain?.name !== this.name?.value) {
-    //     body['name'] = this.name?.value;
-    //   }
-    //   if (this.updatingDomain?.domain !== this.domain?.value) {
-    //     body['domain'] = this.domain?.value;
-    //   }
-    //   if (this.updatingDomain?.description !== this.description?.value) {
-    //     body['description'] = this.description?.value;
-    //   }
-    //   if (this.updatingDomain?.is_active !== this.is_active?.value) {
-    //     body['is_active'] = this.is_active?.value;
-    //   }
-    //   res = await this.ds.updateDomain(body, this.id?.value);
-    // }
-
-    // try {
-    //   console.log('addUpdateDomain', res);
-
-    //   if (res) {
-    //     if (res?.status === 100) {
-    //       const w = this.crudType === this.crudTypes.add ? 'added' : 'updated';
-    //       // this.filterForm.reset();
-    //       $(this.activeModalId).modal('hide');
-    //       this.toastr.success('Success!', `Domain ${w} successfully.`);
-    //       this.domainForm.reset();
-    //       this.page = 1;
-    //       this.getDomains(false);
-    //     } else {
-    //       const w = this.crudType === this.crudTypes.add ? 'Adding' : 'Updating';
-    //       this.toastr.error('Oh Snap!', res?.message || `${w} domain failed`);
-    //     }
-    //   }
-    // } catch (err) {
-    //   console.error(err);
-    //   this.toastr.error('Oh Snap!', 'Server Error');
-    // } finally {
-    //   this.isRequesting = false;
-    // }
+      if (res) {
+        if (res) {
+          const w = this.crudType === this.crudTypes.add ? 'added' : 'updated';
+         
+          this.toastr.success('Success!', `Category ${w} successfully.`);
+          this.domainForm.reset();
+          this.page = 1;
+          this.getCategories();
+          var myModalEl = document?.getElementById('domainModal')
+          var modal = bootstrap.Modal?.getInstance(myModalEl!)
+          modal?.hide()
+          $('domainModal')?.modal('hide');
+        } else {
+          const w = this.crudType === this.crudTypes.add ? 'Adding' : 'Updating';
+          this.toastr.error('Oh Snap!', res?.message || `${w} domain failed`);
+        }
+      }
+    } catch (err) {
+      console.error(err);
+      this.toastr.error('Oh Snap!', 'Server Error');
+    } finally {
+      this.isRequesting = false;
+    }
   }
 
-  deleteDomain() {
-    // // console.log(this.deletingDomain);
-    // if (this.isRequesting) return;
+  deleteDomain(id:any) {
+    console.log(id);
 
-    // this.ds
-    //   .deleteDomain(this.deletingDomain?.id!)
-    //   .then((res) => {
-    //     console.log('deleteDomain', res);
 
-    //     if (res) {
-    //       if (res?.status === 100) {
-    //         $(this.activeModalId).modal('hide');
-    //         this.toastr.success('Success!', 'Domain deleted Successfully');
-    //         this.getDomains(false);
-    //       } else {
-    //         this.toastr.error('Oh Snap!', res?.message || 'Deleting domain failed');
-    //       }
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.error(err);
-    //     this.toastr.error('Oh Snap!', 'Server Error');
-    //   })
-    //   .finally(() => {
-    //     this.isRequesting = false;
-    //   });
+    this.catServ
+      .deleteDomain(id)
+      .then((res) => {
+        console.log('deleteDomain', res);
+
+        if (res) {
+          if (res) {
+           
+            this.toastr.success('Success!', 'Category deleted Successfully');
+            this.getCategories();
+          } else {
+            this.toastr.error('Oh Snap!', res?.message || 'Deleting domain failed');
+          }
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        this.toastr.error('Oh Snap!', 'Server Error');
+      })
+      .finally(() => {
+        this.isRequesting = false;
+      });
   }
 
-  openModal(id: string, type: string = this.crudTypes.add, domain?: DomainType) {
-    // this.crudType = type;
+  openModal(id: string,type:string) {
 
-    // if (type === this.crudTypes.add) {
-    //   this.domainForm.reset();
-    // } else if (type === this.crudTypes.update) {
-    //   this.updatingDomain = domain;
+     this.crudType = type;
 
-    //   this.domainForm.setValue({
-    //     id: domain?.id,
-    //     name: domain?.name,
-    //     domain: domain?.domain,
-    //     description: domain?.description,
-    //     is_active: domain?.is_active === 1 && true,
-    //     is_published: 1,
-    //   });
-    // } else if (type === this.crudTypes.delete) {
-    //   this.deletingDomain = domain;
-    // } else {
-    //   return;
-    // }
-
-    // $(id)?.modal('show');
-    // this.activeModalId = id;
+    var myModalEl = document?.getElementById('domainModal')
+    var modal = bootstrap.Modal?.getInstance(myModalEl!)
+    modal?.show()
+    $(id)?.modal('show');
+    this.activeModalId = id;
   }
 
   pageChanged(newPage: number) {
@@ -257,13 +232,5 @@ export class DomainsComponent implements OnInit {
     return '';
   }
 
-  // clearFilterForm() {
-  //   const { name, domain, is_active } = this.filterForm.value;
-
-  //   if (!name && !domain && !is_active) return;
-
-  //   this.filterForm.reset();
-  //   this.page = 1;
-  //   this.getDomains(false);
-  // }
+ 
 }

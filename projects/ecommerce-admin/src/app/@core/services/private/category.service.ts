@@ -16,7 +16,7 @@ export class CategoryService {
   }
 
   addCatgories(body: any): Promise<any> {
-    return this.cs.postData('categories/', body);
+    return this.cs.postData2('categories/add/', body);
   }
 
   updateDomain(body: any, id: number): Promise<any> {
@@ -24,6 +24,6 @@ export class CategoryService {
   }
 
   deleteDomain(id: number): Promise<any> {
-    return this.cs.deleteData(`admin/domain/${id}/`);
+    return this.cs.deleteData(`categories/${id}/`);
   }
 }

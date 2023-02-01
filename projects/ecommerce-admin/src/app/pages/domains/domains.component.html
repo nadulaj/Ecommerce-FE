@@ -9,11 +9,11 @@
       </div>
 
       <app-icon-btn
-        [text]="'New'"
+        [text]="'New Category'"
         [btnClasses]="'primary-btn btn'"
         [iconName]="'plus'"
         [iconClass]="'main-add-btn-icon'"
-        (btnClick)="openModal('#domainModal')"></app-icon-btn>
+        (btnClick)="openModal('#domainModal','Add')"></app-icon-btn>
     </div>
   </div>
 
@@ -72,8 +72,8 @@
                       <th>ID</th>
                       <th>Category Name</th>
                       <!-- <th>Description</th>
-                      <th>Active Status</th>
-                      <th>Actions</th> -->
+                      <th>Active Status</th>-->
+                      <th>Actions</th> 
                     </tr>
                   </thead>
 
@@ -112,6 +112,7 @@
                             </div>
                           </div>
                         </td> -->
+                        <td><button class="btn btn-warning" (click)="deleteDomain(domain._id)">Delete</button></td>
                       </tr>
                     </ng-container>
                   </tbody>
@@ -149,7 +150,7 @@
   <div class="modal-dialog modal-md modal-dialog-scrollable modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="domainModalLabel">{{ crudType === crudTypes.add ? 'New' : 'Edit' }} Domain</h5>
+        <h5 class="modal-title" id="domainModalLabel">{{ crudType === crudTypes.add ? 'New' : 'Edit' }} Catergory</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
@@ -158,7 +159,7 @@
           <!-- domain name -->
           <div class="d-flex flex-column mb-3">
             <label for="domain-form-name">
-              Domain Name
+              Category Name
               <span class="form-required-sign">*</span>
             </label>
 
@@ -169,65 +170,19 @@
                 type="text"
                 formControlName="name"
                 name="name"
-                placeholder="Domain name"
+                placeholder="Category name"
                 [ngClass]="getFieldClass('name')" />
 
               <ul class="error-wrapper" *ngIf="!isFieldValid('name')">
-                <li *ngIf="name?.errors?.['required']">Domain name is required.</li>
+                <li *ngIf="name?.errors?.['required']">Category name is required.</li>
               </ul>
             </div>
           </div>
 
-          <!-- domain -->
-          <div class="d-flex flex-column mb-3">
-            <label for="domain-form-domain">
-              Domain
-              <span class="form-required-sign">*</span>
-            </label>
 
-            <div class="d-flex flex-column">
-              <input
-                id="domain-form-domain"
-                class="form-control"
-                type="text"
-                formControlName="domain"
-                name="domain"
-                placeholder="Domain"
-                [ngClass]="getFieldClass('domain')" />
 
-              <ul class="error-wrapper" *ngIf="!isFieldValid('domain')">
-                <li *ngIf="domain?.errors?.['required']">Domain is required.</li>
-                <!-- <li *ngIf="domain?.errors?.['pattern']">Domain is invalid.</li> -->
-              </ul>
-            </div>
-          </div>
-
-          <!-- description -->
-          <div class="d-flex flex-column mb-4">
-            <label for="domain-form-description">Description</label>
-
-            <div class="d-flex flex-column">
-              <textarea
-                id="domain-form-description"
-                class="form-control"
-                type="text"
-                name="description"
-                formControlName="description"
-                rows="3"
-                placeholder="Give a description">
-              </textarea>
-
-              <ul class="error-wrapper" *ngIf="!isFieldValid('description')"></ul>
-            </div>
-          </div>
-
-          <!-- active state -->
-          <div class="d-flex flex-column mb-3">
-            <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" role="switch" id="domain-form-is-active" name="is_active" formControlName="is_active" />
-              <label class="form-check-label" for="domain-form-is-active">Is Active? (Yes / No)</label>
-            </div>
-          </div>
+      
+      
         </div>
 
         <div class="modal-footer">
@@ -236,6 +191,7 @@
           <app-icon-btn
             [text]="crudType === crudTypes.add ? 'Add' : 'Save'"
             [type]="'submit'"
+            (btnClick)="addUpdateDomain()"
             [btnClasses]="'primary-btn btn'"
             [iconName]="crudType === crudTypes.add ? 'plus' : 'edit'"
             [iconClass]="crudType === crudTypes.add ? 'main-add-btn-icon' : 'main-update-btn-icon'"
@@ -246,10 +202,12 @@
   </div>
 </div>
 
+
+
 <!-- domain delete confirm modal -->
-<app-delete-modal
+<!-- <app-delete-modal
   [id]="'domainDeleteModal'"
   [type]="'domain'"
   [name]="deletingDomain?.name"
   [isLoading]="isRequesting"
-  (itemDelete)="deleteDomain()"></app-delete-modal>
+  (itemDelete)="deleteDomain()"></app-delete-modal> -->
