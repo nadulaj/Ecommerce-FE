@@ -1,0 +1,43 @@
+@mixin center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/*
+  breakpoint arguments
+  these are the main breakpoints according to the bootstrap breakpoints
+*/
+@mixin respond($breakpoint) {
+  @if $breakpoint == sm {
+    @media screen and (max-width: 576px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == md {
+    @media screen and (max-width: 768px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == lg {
+    @media screen and (max-width: 992px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == xl {
+    @media screen and (max-width: 1200px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == xxl {
+    @media screen and (max-width: 1400px) {
+      @content;
+    }
+  }
+}
+//

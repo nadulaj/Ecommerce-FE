@@ -1,0 +1,24 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  // this defines what 1rem is 1rem = 16px, default is 1rem = 16px
+  font-size: 100%;
+
+  @include respond(lg) {
+    font-size: 85%;
+  }
+}
+
+body {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: $primary-font, sans-serif !important;
+  color: $color-text-normal;
+}

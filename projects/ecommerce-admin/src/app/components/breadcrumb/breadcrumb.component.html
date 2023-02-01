@@ -1,0 +1,15 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a (click)="navigate('/pages/dashboard')">Home</a></li>
+
+    <ng-container *ngFor="let route of currentRoutes; index as i">
+      <li class="breadcrumb-item" *ngIf="i + 1 !== currentRoutes.length">
+        <a (click)="navigate('/pages/' + route)">{{ route }}</a>
+      </li>
+
+      <li class="breadcrumb-item active" *ngIf="i + 1 === currentRoutes.length">
+        <a>{{ route }}</a>
+      </li>
+    </ng-container>
+  </ol>
+</nav>

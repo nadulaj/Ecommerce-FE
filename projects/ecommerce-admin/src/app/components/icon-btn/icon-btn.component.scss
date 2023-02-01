@@ -1,0 +1,31 @@
+@import '../../@theme/styles/variables';
+
+.main-add-btn-icon,
+.main-update-btn-icon,
+.main-delete-btn-icon {
+  fill: $color-white;
+}
+
+.main-add-btn-icon {
+  width: 1rem;
+}
+
+.main-update-btn-icon {
+  width: 1.2rem;
+  transform: translateY(-2px);
+}
+
+.main-delete-btn-icon {
+  width: 1rem;
+  transform: translateY(-2px);
+}
+
+.secondary-update-btn-icon {
+  width: 1rem;
+  fill: $color-black-light;
+}
+
+.secondary-delete-btn-icon {
+  width: 1rem;
+  fill: $color-danger;
+}

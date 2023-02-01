@@ -1,0 +1,15 @@
+@import '../../@theme/styles/variables';
+
+.no-data-root {
+}
+
+.no-data-root > img {
+  width: 10rem;
+  height: auto;
+}
+
+.no-data-root > h6 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba($color: $color-text-normal, $alpha: 0.75);
+}

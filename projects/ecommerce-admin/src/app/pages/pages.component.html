@@ -1,0 +1,25 @@
+<div class="pages-root d-flex flex-row">
+  <div id="left-pane" class="left-pane">
+    <div class="pages-logo d-flex justify-content-between align-items-center px-4">
+      <a href="/pages/dashboard">
+        <img id="pages-logo-large" width="120" class="pages-logo-large" src="../../assets/logo.png" alt="onepay logo" draggable="false" />
+
+        <img id="pages-logo-small" class="pages-logo-small" src="../../assets/logo.png" alt="onepay logo" draggable="false" />
+      </a>
+    </div>
+
+    <app-side-menu></app-side-menu>
+  </div>
+
+  <div id="right-pane" class="right-pane d-flex flex-column">
+    <app-header></app-header>
+
+    <div class="content">
+      <div class="container-xxl">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+
+    <app-footer></app-footer>
+  </div>
+</div>

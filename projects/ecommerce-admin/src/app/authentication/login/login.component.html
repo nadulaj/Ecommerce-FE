@@ -1,0 +1,86 @@
+<div class="login-root">
+  <img class="logo login-logo-small d-block d-md-none" src="../../../assets/logo.png" alt="onepay logo small" draggable="false" />
+
+  <div class="d-flex flex-column-reverse justify-content-end flex-md-row h-100">
+    <div class="login-left-pane d-flex flex-column justify-content-start justify-content-md-between mt-3 mt-md-0">
+      <img class="login-logo-large d-none d-md-block" src="../../../assets/logo.png" alt="onepay logo" draggable="false" />
+
+      <form (ngSubmit)="login()" [formGroup]="loginForm">
+        <h1 class="heading-1 d-none d-md-block mb-3">Hello,</h1>
+        <h1 class="heading-1 d-block d-md-none text-center mb-0">Hello</h1>
+
+        <h1 class="heading-2 text-center text-md-start">Welcome back</h1>
+
+        <p class="heading-3 mt-3 mt-md-5 mb-5 mb-md-4 text-center text-md-start">Please sign in to the E-Commerce Admin Portal</p>
+
+        <!-- email -->
+        <div class="d-flex flex-column mb-3">
+          <label for="login-email">
+            Email
+            <span class="form-required-sign">*</span>
+          </label>
+
+          <div class="d-flex flex-column">
+            <input
+              id="login-email"
+              name="email"
+              formControlName="email"
+              type="email"
+              placeholder="Enter your email"
+              class="form-control"
+              [ngClass]="getFieldClass('email')" />
+
+            <ul class="error-wrapper" *ngIf="!isFieldValid('email')">
+              <li *ngIf="email?.errors?.['required']">Email is required.</li>
+              <li *ngIf="email?.errors?.['pattern']">Invalid email address.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- password -->
+        <div class="d-flex flex-column mb-3">
+          <label for="login-password">
+            Password
+            <span class="form-required-sign">*</span>
+          </label>
+
+          <div class="d-flex flex-column">
+            <input
+              id="login-password"
+              name="password"
+              formControlName="password"
+              type="password"
+              placeholder="Enter your password"
+              class="form-control"
+              [ngClass]="getFieldClass('password')" />
+
+            <ul class="error-wrapper" *ngIf="!isFieldValid('password')">
+              <li *ngIf="password?.errors?.['required']">Password is required.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-sm-end align-items-center">
+          <app-icon-btn
+            [type]="'submit'"
+            [text]="'Sign in'"
+            [btnClasses]="'primary-btn login-btn btn'"
+            [isLoading]="isRequesting"
+            [isIcon]="false"></app-icon-btn>
+
+          <!-- <button class="login-btn btn btn-success primary-btn" type="submit" [disabled]="!loginForm.valid || isRequesting">Sign in</button> -->
+        </div>
+      </form>
+
+      <div class="footer d-none d-md-block">
+        <span class="me-1">Created with ♥ by</span>
+        <a class="me-1" href="https://spemai.com" target="_blank">Nadula</a>
+        <span class="year">© 2022</span>
+      </div>
+    </div>
+
+    <div class="login-right-pane d-flex justify-content-center align-items-center">
+      <img src="../../../assets/Icons/login-background.svg" alt="login background" draggable="false" />
+    </div>
+  </div>
+</div>

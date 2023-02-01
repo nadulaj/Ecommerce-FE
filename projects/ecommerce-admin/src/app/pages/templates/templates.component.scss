@@ -1,0 +1,64 @@
+@import '../../@theme/styles/variables';
+
+.templates-root {
+  .template-image {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 5px;
+    position: relative;
+
+    img {
+      width: 100%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+#viewTemplateModal {
+  .modal-body {
+    .image {
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    .detail {
+      display: flex;
+      align-items: flex-start;
+
+      span {
+        word-wrap: break-word;
+        font-size: 13px;
+      }
+
+      a {
+        word-wrap: break-word;
+        word-break: break-all;
+        font-size: 13px;
+      }
+
+      .detail-left {
+        font-weight: 400;
+      }
+
+      .detail-middle {
+        font-weight: 400;
+      }
+
+      .detail-right {
+        font-weight: 500;
+      }
+    }
+  }
+
+  .template-attr-no-data span {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: $color-gray-dark;
+  }
+}

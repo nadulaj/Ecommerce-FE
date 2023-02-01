@@ -1,0 +1,207 @@
+<div class="templates-root">
+  <!-- heading -->
+  <div class="row mb-7">
+    <div class="col d-flex justify-content-between align-items-center">
+      <div class="d-flex flex-column justify-content-center">
+        <h2 class="heading-1">Items</h2>
+
+        <app-breadcrumb></app-breadcrumb>
+      </div>
+
+      <app-icon-btn
+        [text]="'New'"
+        [btnClasses]="'primary-btn btn'"
+        [iconName]="'plus'"
+        [iconClass]="'main-add-btn-icon'"
+        (btnClick)="openModal('#templateModal')"></app-icon-btn>
+    </div>
+  </div>
+
+  <div class="d-flex flex-column">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex justify-content-end align-items-center mb-3">
+          <app-refresh-btn (click)="refreshTemplates()"></app-refresh-btn>
+        </div>
+
+        <ng-container *ngIf="!isLoading; else loadingDiv">
+          <ng-container *ngIf="templates ; else noDataDiv">
+            <div class="default-table">
+              <div class="table-responsive">
+                <table class="table table-sm align-middle">
+                  <thead>
+                    <tr>
+                      <th>Image</th>
+                      <th>Name</th>
+                      <th>Category ID</th>
+                      <th>category</th>
+                      <th>Currency</th>
+                      <th>Current Quantity</th>
+                      <th>description</th>
+                      <th>Gross Amount</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <ng-container *ngFor="let template of templates">
+                      <tr>
+                        <td>
+                          <div class="template-image">
+                            <img [src]="imageBaseUrl + template?.images[0]?.image" [alt]="template?.name" *ngIf="template.images" loading="lazy" />
+                            <!-- <img src="assets/img/image_placeholder.jpg" alt="template image" *ngIf="!template.image" loading="lazy" /> -->
+                          </div>
+                        </td>
+                    
+                          <td>{{ template.name || 'Not Available' }}</td>
+                        <td>{{ template.category_id || 'Not Available' }}</td>
+
+                       <td>{{ template.category || 'Not Available' }}</td>
+                        <td>{{ template.currency || 'Not Available' }}</td>
+                        <td>{{ template.current_quantity|| 'Not Available' }}</td>
+                        <td>{{ template.description || 'Not Available' }}</td>
+                        <td>{{ template.gross_amount || 'Not Available' }}</td>
+                 
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+
+        <ng-template #loadingDiv>
+          <app-loading-spinner [componentHeight]="'15rem'"></app-loading-spinner>
+        </ng-template>
+
+        <ng-template #noDataDiv>
+          <app-no-data [componentHeight]="'15rem'"></app-no-data>
+        </ng-template>
+
+        <div class="d-flex justify-content-between align-items-center mt-3" *ngIf="templateCount > 0 && !isLoading">
+          <select class="form-select" (change)="limitChange($event)" style="width: 5.5rem">
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+
+          <pagination-controls (pageChange)="pageChanged($event)" [responsive]="true" (pageBoundsCorrection)="pageChanged($event)"></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- view template modal -->
+<div class="modal fade" id="viewTemplateModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="viewTemplateModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="viewTemplateModalLabel">Template Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="image mb-5 w-50 mx-auto" *ngIf="viewingTemplate?.image">
+          <img [src]="imageBaseUrl + viewingTemplate?.image" [alt]="viewingTemplate?.name" />
+        </div>
+
+        <div class="row mb-2 mt-3 detail">
+          <span class="col-3 detail-left">Name</span>
+          <span class="col-1 detail-middle">:</span>
+          <span class="col detail-right">{{ viewingTemplate?.name || 'Not Available' }}</span>
+        </div>
+
+        <div class="row mb-2 detail">
+          <span class="col-3 detail-left">Status</span>
+          <span class="col-1 detail-middle">:</span>
+          <div class="col detail-right">
+            <span class="badge bg-success" *ngIf="viewingTemplate?.is_active === 1">Active</span>
+            <span class="badge bg-danger" *ngIf="viewingTemplate?.is_active === 0">Deactive</span>
+          </div>
+        </div>
+
+        <div class="row mb-2 detail">
+          <span class="col-3 detail-left">URL</span>
+          <span class="col-1 detail-middle">:</span>
+          <ng-container *ngIf="viewingTemplate?.url">
+            <div class="col detail-right">
+              <a [href]="viewingTemplate?.url" target="_blank">
+                {{ viewingTemplate?.url }}
+              </a>
+              <app-copy-text [text]="viewingTemplate?.url"></app-copy-text>
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="!viewingTemplate?.url">
+            <span class="col detail-right">Not Available</span>
+          </ng-container>
+        </div>
+
+        <div class="row mb-2 detail">
+          <span class="col-3 detail-left">Description</span>
+          <span class="col-1 detail-middle">:</span>
+          <span class="col detail-right">{{ viewingTemplate?.description || 'Not Available' }}</span>
+        </div>
+
+        <div class="mt-5" *ngIf="viewingTemplate?.template_attributes">
+          <h6 class="mb-3">Custom Attributes</h6>
+
+          <ng-container *ngIf="viewingTemplate?.template_attributes && viewingTemplate?.template_attributes?.length !== 0; else noCustomAttributesDiv">
+            <div class="default-table">
+              <div class="table-responsive">
+                <table class="table table-sm align-middle">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                      <th>Active Status</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <ng-container *ngFor="let attr of viewingTemplate?.template_attributes">
+                      <tr>
+                        <td>{{ attr.name || 'Not Available' }}</td>
+
+                        <td style="max-width: 12rem">{{ attr.description || 'Not Available' }}</td>
+
+                        <td>
+                          <span class="badge bg-success" *ngIf="attr.is_active === 1">Active</span>
+
+                          <span class="badge bg-danger" *ngIf="attr.is_active === 0">Deactive</span>
+                        </td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </ng-container>
+
+          <ng-template #noCustomAttributesDiv>
+            <div class="template-attr-no-data d-flex justify-content-center align-items-center py-5 px-3">
+              <span class="text-center">No custom attributes are available!</span>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- template modal - for add, update -->
+<app-template-form [crudType]="crudType" [modalId]="activeModalId" (submitForm)="addUpdateTemplate($event)" [isLoading]="isRequesting"></app-template-form>
+
+<!-- template delete confirm modal -->
+<app-delete-modal
+  [id]="'templateDeleteModal'"
+  [type]="'template'"
+  [name]="deletingTemplate?.name"
+  [isLoading]="isRequesting"
+  (itemDelete)="deleteTemplate()"></app-delete-modal>

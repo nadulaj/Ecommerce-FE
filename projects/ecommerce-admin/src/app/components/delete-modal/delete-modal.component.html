@@ -1,0 +1,32 @@
+<div class="modal fade" [id]="id" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">
+  <div class="modal-dialog modal-md modal-dialog-scrollable modal-dialog-centered">
+    <div class="modal-content p-3">
+      <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+
+      <div class="modal-body pt-0 px-5">
+        <div class="d-flex justify-content-center mb-3">
+          <!-- <span>
+            <svg-icon src="assets/icons/alert.svg" [svgClass]="'delete-modal-icon'"></svg-icon>
+          </span> -->
+        </div>
+
+        <div class="delete-modal-message text-center mb-5">
+          Are you sure you want to delete {{ type }} <strong>{{ name }}</strong
+          >?
+        </div>
+
+        <div class="d-flex justify-content-center align-items-center">
+          <button type="button" class="btn btn-light me-3" data-bs-dismiss="modal">Cancel</button>
+<!-- 
+          <app-icon-btn
+            [text]="'Delete'"
+            [btnClasses]="'btn btn-danger'"
+            [iconName]="'trash'"
+            [iconClass]="'main-delete-btn-icon'"
+            [isLoading]="isLoading"
+            (btnClick)="deleteHandler()"></app-icon-btn> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+@import '../../@theme/styles/variables';
+
+.refresh-btn-root {
+  .table-refresh-btn-icon {
+    width: 20px;
+    fill: $color-gray;
+  }
+}
+
+.refresh-btn-root:hover .table-refresh-btn-icon {
+  fill: $color-primary-light;
+}

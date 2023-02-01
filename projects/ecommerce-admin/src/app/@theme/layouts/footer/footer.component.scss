@@ -1,0 +1,18 @@
+@import '../../styles/variables';
+
+.footer {
+  height: 60px;
+  font-size: 13px;
+  font-weight: 500;
+  color: $color-text-normal;
+  transition: left $side-menu-collapse-transition;
+  padding: 0 30px;
+  background-color: $footer-background-color;
+  // z-index: $footer-z-index;
+  pointer-events: all;
+
+  .year {
+    color: #a1a5b7;
+    font-weight: 600;
+  }
+}

@@ -1,0 +1,15 @@
+@import '../../@theme/styles/variables';
+
+.copy-btn-root {
+  padding: 0.2rem 0.4rem !important;
+  border-radius: 0.3rem !important;
+
+  .copy-btn-icon {
+    width: 16px;
+    fill: $color-gray;
+  }
+}
+
+.copy-btn-root:hover .copy-btn-icon {
+  fill: $color-primary-light;
+}

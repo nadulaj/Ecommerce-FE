@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiBaseUrl: 'https://202x2vcym8.execute-api.ap-southeast-1.amazonaws.com/development/',
+  aws: 'https://onepayserviceimages.s3.amazonaws.com/',
+  apiBaseUrl2: 'http://localhost:3000/',
 };
 
 /*

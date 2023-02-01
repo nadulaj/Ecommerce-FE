@@ -1,0 +1,76 @@
+@import '../@theme/styles/variables';
+
+.pages-root {
+  position: relative;
+  background-color: $color-white;
+
+  .left-pane {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: $left-pane-width;
+    transition: width $side-menu-collapse-transition;
+    background-color: $left-pane-background-color;
+    box-shadow: $left-pane-box-shadow;
+    z-index: $left-pane-z-index;
+
+    .pages-logo {
+      height: $logo-height;
+      margin-bottom: $logo-margin-bottom;
+
+      .pages-logo-large {
+        transform: scale(1.3);
+        margin: 0px 0px 0px 16px;
+      }
+
+      .pages-logo-small {
+        margin: 0px;
+        transform: scale(1);
+        display: none;
+      }
+    }
+  }
+
+  .right-pane {
+    position: relative;
+    width: 100%;
+    padding-left: $left-pane-width;
+    transition: padding-left $side-menu-collapse-transition;
+    // background-color: $right-pane-background-color;
+    pointer-events: none;
+
+    .content {
+      width: 100%;
+      min-height: $content-height;
+      margin: $content-margin;
+      padding: $content-padding;
+      background-color: $content-background-color;
+      // border-radius: $content-border-radius;
+      pointer-events: all;
+    }
+  }
+}
+
+.left-pane.menu-collapse {
+  z-index: 100;
+  transition: width $side-menu-collapse-transition !important;
+  width: $side-menu-collapse-width !important;
+}
+
+.left-pane.menu-collapse:hover {
+  transition: width $side-menu-collapse-transition !important;
+  width: $left-pane-width !important;
+}
+
+.left-pane.menu-collapse:not(:hover) .pages-logo-large {
+  display: none;
+}
+
+.left-pane.menu-collapse:not(:hover) .pages-logo-small {
+  display: block !important;
+}
+
+.left-pane.menu-collapse + .right-pane {
+  padding-left: $side-menu-collapse-width !important;
+}

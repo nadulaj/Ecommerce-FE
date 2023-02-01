@@ -1,0 +1,110 @@
+@import '../../@theme/styles/variables';
+@import '../../@theme/styles/mixings';
+
+.login-root {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+
+  .login-logo-large {
+    width: 8rem;
+    height: auto;
+  }
+
+  .login-logo-small {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+  }
+
+  .login-left-pane {
+    width: 50%;
+    padding: 2rem 0 1.5rem 2rem;
+
+    form {
+      width: 25rem;
+      margin: 0 auto;
+
+      .heading-1,
+      .heading-2 {
+        font-size: 40px;
+        font-weight: 600;
+        color: #1a202c;
+      }
+
+      .heading-3 {
+        font-size: 14px;
+        font-weight: 500;
+        color: #3b8968;
+      }
+    }
+
+    .footer {
+      font-size: 13px;
+      font-weight: 500;
+      color: $color-text-normal;
+      transition: left $side-menu-collapse-transition;
+
+      .year {
+        color: #a1a5b7;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .login-right-pane {
+    width: 50%;
+    background-color: $login-right-pane-background-color;
+    // background-color: red;
+    box-shadow: $login-right-pane-box-shadow;
+
+    img {
+      width: 25rem;
+      height: auto;
+    }
+  }
+}
+
+@include respond(md) {
+  .login-root {
+    padding-top: 10rem;
+    overflow: auto;
+
+    .login-left-pane {
+      width: 100%;
+
+      form {
+        width: 80%;
+
+        .heading-1,
+        .heading-2 {
+          font-size: 30px;
+        }
+      }
+    }
+
+    .login-right-pane {
+      width: 100%;
+      background-color: transparent;
+      box-shadow: none;
+
+      img {
+        width: 12rem;
+      }
+    }
+  }
+}
+
+@include respond(sm) {
+  .login-root {
+    .login-left-pane {
+      form {
+        .login-btn {
+          width: 100%;
+          padding: 0.38rem 0;
+        }
+      }
+    }
+  }
+}

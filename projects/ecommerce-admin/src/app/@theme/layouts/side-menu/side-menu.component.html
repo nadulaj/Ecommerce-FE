@@ -1,0 +1,77 @@
+<div id="side-menu" class="side-menu">
+  <div class="accordion" id="menuAccordion">
+    <ng-container *ngFor="let item of menuItems; index as i">
+      <ng-container *ngIf="getMenuItemType(item) === MENU_ITEM_TYPES.HEADING">
+        <div class="menu-item">
+          <div class="menu-content menu-heading">
+            <span>{{ item.title }}</span>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="getMenuItemType(item) === MENU_ITEM_TYPES.DIVIDER">
+        <div class="menu-item">
+          <div class="menu-content menu-divider">
+            <hr class="mx-2 my-3 w-100" />
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="getMenuItemType(item) === MENU_ITEM_TYPES.SUB_MENU">
+        <div class="menu-item">
+          <div class="sub-menu" [ngClass]="{ active: isActiveRoute(item) }">
+            <div class="accordion-item">
+              <span class="accordion-header" [id]="'heading-' + i">
+                <button
+                  class="accordion-button"
+                  [ngClass]="{ collapsed: !isActiveRoute(item) }"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  [attr.data-bs-target]="'#collapse' + i"
+                  [attr.aria-expanded]="isActiveRoute(item)"
+                  [attr.aria-controls]="'collapse' + i">
+                  <span>
+                    <svg-icon [src]="'assets/icons/' + item.icon + '.svg'" [svgClass]="'menu-icon'"></svg-icon>
+                  </span>
+
+                  <span class="sub-menu-title">{{ item.title }}</span>
+                </button>
+
+                <div
+                  [id]="'collapse' + i"
+                  class="accordion-collapse collapse"
+                  [ngClass]="{ show: isActiveRoute(item) }"
+                  [attr.aria-labelledby]="'heading-' + i"
+                  data-bs-parent="#menuAccordion">
+                  <div class="accordion-body">
+                    <ng-container *ngFor="let subItem of item.children">
+                      <div class="menu-item">
+                        <div class="menu-link sub-menu-link" [ngClass]="{ active: isActiveRoute(subItem) }" (click)="navigate(subItem.route)">
+                          <span class="menu-bullet"></span>
+
+                          <span class="menu-title">{{ subItem.title }}</span>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </span>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="getMenuItemType(item) === MENU_ITEM_TYPES.MENU_LINK">
+        <div class="menu-item">
+          <div class="menu-link" [ngClass]="{ active: isActiveRoute(item) }" (click)="navigate(item.route)">
+            <span>
+              <svg-icon [src]="'assets/icons/' + item.icon + '.svg'" [svgClass]="'menu-icon'"></svg-icon>
+            </span>
+
+            <span class="menu-title">{{ item.title }}</span>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+@import '../../@theme/styles/variables';
+
+.delete-modal-icon {
+  width: 8rem;
+  fill: $color-warning;
+}
+
+.delete-modal-message {
+  font-weight: 400;
+  color: $color-gray;
+}

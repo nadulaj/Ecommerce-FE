@@ -1,0 +1,402 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 0;
+  color: $color-text-normal;
+}
+
+// margins
+.mb-6 {
+  margin-bottom: 4rem !important;
+}
+
+.mb-7 {
+  margin-bottom: 6rem !important;
+}
+
+.text-success {
+  color: $color-primary !important;
+}
+
+// forms, input field
+form label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: $label-color;
+  margin-bottom: 0.4rem;
+}
+
+.form-control,
+.form-select {
+  border-radius: 0.475rem !important;
+  background-color: $input-field-background-color !important;
+  border-color: $input-field-border-color;
+  color: $input-field-color !important;
+  font-size: 0.925rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+  padding: 0.5rem 1rem;
+}
+
+.form-control:focus,
+.form-control:active,
+.form-select:focus,
+.form-select:active {
+  background-color: $input-field-background-color-focus !important;
+  border-color: $input-field-border-color-focus;
+  box-shadow: none;
+  color: $input-field-color !important;
+}
+
+.form-control::placeholder {
+  color: $input-field-placeholder-color !important;
+}
+
+// select
+.form-select::-ms-expand {
+  display: none;
+}
+
+// .form-select::after {
+//   background-color: red;
+// }
+
+.form-select option {
+  background-color: $color-white;
+  border: none;
+  // color: $input-field-placeholder-color !important;
+}
+
+// switch
+.form-switch {
+  display: flex !important;
+}
+
+.form-check-input {
+  height: 2em !important;
+  width: 3.5em !important;
+  border-color: $color-gray-light-2 !important;
+  cursor: pointer !important;
+}
+
+.form-check-label {
+  margin: auto 0 auto 20px !important;
+  cursor: pointer !important;
+}
+
+.form-check-input:checked {
+  background-color: $color-primary-light-2 !important;
+}
+
+.form-check-input:checked ~ .form-check-label::before {
+  background-color: #28a745 !important;
+  border-color: #28a745 !important;
+}
+
+.form-check-input:focus {
+  border-color: $color-primary-light-2 !important;
+  box-shadow: none !important;
+}
+//
+
+// form validation
+.form-control.is-valid {
+  border-color: $color-primary-light-2 !important;
+}
+
+.form-control.is-invalid {
+  border-color: $color-danger !important;
+}
+
+.form-control.is-valid,
+.form-control.is-invalid {
+  box-shadow: none !important;
+}
+//
+
+// buttons
+.btn {
+  border-radius: 0.475rem !important;
+  font-weight: 500 !important;
+  border: none !important;
+}
+
+.btn:not(.btn-sm, .btn-lg) {
+  padding: 0.5rem 1.25rem !important;
+}
+
+.btn-sm {
+  font-size: 0.825rem;
+  padding: 0.4rem 1.3rem !important;
+}
+
+.btn:focus,
+.btn:active {
+  box-shadow: none !important;
+}
+
+// btn success
+.btn-success {
+  background-color: $color-primary-light !important;
+}
+
+.btn-success:hover {
+  background-color: $color-primary-light-2 !important;
+}
+
+// btn dark
+.btn-dark {
+  background-color: $color-black-light !important;
+}
+
+.btn-dark:hover {
+  background-color: rgba($color: $color-black-light, $alpha: 0.9);
+}
+
+// btn light
+.btn-light {
+  background-color: $color-gray-light-3 !important;
+}
+
+.btn-light:hover {
+  background-color: $color-primary-light-3 !important;
+}
+
+// btn danger
+.btn-danger {
+  background-color: $color-danger !important;
+}
+
+.btn-danger:hover {
+  background-color: $color-danger-dark !important;
+}
+//
+
+// links
+a {
+  text-decoration: none !important;
+  color: $color-text-normal;
+  cursor: pointer !important;
+}
+
+a:hover {
+  color: $color-secondary-light-3 !important;
+}
+
+// card
+.card {
+  border: none;
+  box-shadow: $card-box-shadow;
+  background-color: $card-background-color;
+  border-radius: 0.625rem !important;
+  padding: 2rem 2rem !important;
+}
+
+.card-header {
+  padding: 0 !important;
+}
+
+.card-body {
+  padding: 0 !important;
+}
+//
+
+// breadcrumb
+.breadcrumb {
+  margin-bottom: 0 !important;
+}
+
+.breadcrumb-item a {
+  color: #a1a5b7 !important;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+
+.breadcrumb a:hover {
+  color: $color-secondary-light-3 !important;
+}
+
+.breadcrumb-item.active {
+  a {
+    color: $color-text-normal !important;
+    cursor: text !important;
+  }
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  padding: 4px 8px 1px 0px;
+  font-size: 10px;
+  font-weight: 600;
+}
+//
+
+// badges
+.badge.bg-success {
+  color: $color-primary-light-2 !important;
+  background-color: $color-primary-light-3 !important;
+}
+
+.badge.bg-info {
+  color: $color-secondary-light-3 !important;
+  background-color: $color-secondary-light-4 !important;
+}
+
+.badge.bg-warning {
+  color: $color-warning !important;
+  background-color: $color-warning-light !important;
+}
+
+.badge.bg-danger {
+  color: $color-danger !important;
+  background-color: $color-danger-light !important;
+}
+//
+
+////// ngx pagination //////
+.ngx-pagination {
+  margin-bottom: 0 !important;
+
+  li {
+    padding: 0 !important;
+    background-color: transparent !important;
+  }
+
+  li a,
+  li span {
+    border: none !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    margin: 0 6px !important;
+    border-radius: 0.475rem !important;
+    padding: 0.4rem 0.3rem !important;
+  }
+
+  li:not(.disabled) {
+    cursor: pointer !important;
+  }
+
+  .current span {
+    background: $color-primary-light !important;
+    color: $color-white !important;
+  }
+
+  li.pagination-next a,
+  li.pagination-previous a {
+    padding: 0.4rem 1.1rem !important;
+  }
+
+  li.pagination-next span {
+    padding: 0.4rem 0rem 0.4rem 1.1rem !important;
+    margin: 0 0 0 6px !important;
+  }
+
+  li.pagination-previous span {
+    padding: 0.4rem 1.1rem 0.4rem 0rem !important;
+    margin: 0 6px 0 0 !important;
+  }
+
+  li:not(.current):not(.disabled) a {
+    background: transparent !important;
+    color: $input-field-color !important;
+    text-decoration: none !important;
+    margin: 0 4px !important;
+  }
+
+  li:not(.current):not(.disabled):hover a {
+    background: $color-gray-light-3 !important;
+    color: $color-primary-light !important;
+  }
+}
+
+.ngx-pagination a:hover {
+  background: none !important;
+}
+//////
+
+// modals
+.modal-dialog {
+  .modal-content {
+    border: none !important;
+
+    .modal-header {
+      padding: 1.3rem 1.75rem;
+      border-bottom: 1px solid $color-gray-light-3;
+
+      h5 {
+        color: $color-text-normal;
+      }
+    }
+
+    .modal-body {
+      max-height: 75vh !important;
+      height: auto !important;
+      overflow-y: auto !important;
+      padding: 1.75rem;
+    }
+
+    .modal-footer {
+      border-top: 1px solid $color-gray-light-3;
+      padding: 1rem 1.75rem;
+    }
+  }
+}
+
+// .btn-close {
+//   color: $color-gray-light;
+// }
+
+// .btn-close:hover {
+//   color: $color-primary-light-2;
+// }
+
+.btn-close:focus {
+  box-shadow: none !important;
+}
+
+.modal-backdrop {
+  background-color: rgba($color: $color-black, $alpha: 0.8);
+}
+
+// change 2nd modal/backdrop z-index, so it will be top of 1st model
+// .modal:nth-of-type(even) {
+//   z-index: 1070 !important;
+// }
+// .modal-backdrop.show:nth-of-type(even) {
+//   z-index: 1065 !important;
+// }
+.modal-top {
+  z-index: 1070 !important;
+}
+
+.backdrop-top {
+  z-index: 1065 !important;
+}
+//
+
+// div scrollbar
+/* width */
+div::-webkit-scrollbar {
+  width: 6.4px;
+}
+
+/* Track */
+div::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+div::-webkit-scrollbar-thumb {
+  background: #e6eaec;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+div::-webkit-scrollbar-thumb:hover {
+  background: #d5d8da;
+}
+//

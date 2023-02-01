@@ -1,0 +1,128 @@
+// fonts
+$primary-font: 'Poppins';
+//
+
+// colors
+$color-white: #fff;
+$color-black: #000;
+$color-black-light: #1c1f23;
+$color-text-normal: #181c32;
+
+$color-gray: #7e8299;
+$color-gray-light: #a1a5b7;
+$color-gray-light-2: #d3d8df;
+$color-gray-light-3: #f4f6fa;
+$color-gray-dark: gray;
+
+$color-primary: #26966b;
+$color-primary-light: #29af7c;
+$color-primary-light-2: #50cd89;
+$color-primary-light-3: #e8fff3;
+$color-primary-dark: #3b8968;
+$color-primary-dark-2: #225b46;
+
+$color-secondary: #0053f5;
+$color-secondary-light: #007aff;
+$color-secondary-light-2: #008bd9;
+$color-secondary-light-3: #00a3ff;
+$color-secondary-light-4: #f1faff;
+$color-secondary-dark: #0055fa;
+$color-secondary-dark-2: #003cd8;
+
+$color-success: $color-primary-light-2;
+$color-info: $color-secondary-light-2;
+$color-warning: #ffc700;
+$color-danger: #f4416c;
+$color-success-light: $color-primary-light-3;
+$color-info-light: $color-secondary-light-3;
+$color-warning-light: #fff8dd;
+$color-danger-light: #fff5f8;
+$color-danger-dark: #d43359;
+
+//
+
+// z-indexes
+$left-pane-z-index: 300;
+$right-pane-z-index: 200;
+$header-z-index: 300;
+$footer-z-index: 300;
+$content-z-index: 200;
+
+// headings
+// heading 1
+$heading-1-color: $color-text-normal;
+
+// heading 2
+$heading-2-color: $color-text-normal;
+//
+
+// labels
+$label-color: #3f4254;
+//
+
+// text fields
+$input-field-color: #5e6278;
+$input-field-background-color: #f5f8fa;
+$input-field-background-color-focus: #eef3f7;
+$input-field-border-color: #f5f8fa;
+$input-field-border-color-focus: #eef3f7;
+$input-field-placeholder-color: #a1a5b7;
+
+// login
+$login-right-pane-background-color: #f4f8fb;
+$login-right-pane-box-shadow: 1px 0px 20px 1px #f4f5f9;
+
+// app left side
+$left-pane-width: 300px;
+$left-pane-background-color: $color-white;
+$left-pane-box-shadow: 5px 0px 10px rgba(70, 78, 95, 0.05);
+
+// app right side
+$right-pane-background-color: #f4f8fb;
+
+// header
+$header-height: 80px;
+$header-background-color: $right-pane-background-color;
+
+// footer
+$footer-height: 60px;
+$footer-background-color: $right-pane-background-color;
+
+// logo
+$logo-height: 100px;
+$logo-margin-bottom: 30px;
+
+// side menu
+$side-menu-width: calc($left-pane-width - 10px);
+$side-menu-collapse-width: 100px;
+$side-menu-height: calc(100vh - ($logo-height + $logo-margin-bottom + 16px));
+$side-menu-collapse-transition: 0.3s ease;
+$side-menu-background-color: $color-white;
+
+// content
+$content-height: calc(100vh - ($header-height + $footer-height));
+$content-padding: 40px 30px 20px 30px;
+$content-margin: $header-height 0 0 0;
+$content-background-color: $right-pane-background-color;
+$content-border-radius: 30px 0 0 30px;
+
+// card
+$card-background-color: $color-white;
+$card-box-shadow: 0px 0px 20px 0px rgba(76, 87, 125, 0.02);
+
+// themes
+// light theme
+$light-theme: ();
+
+// dark theme
+$dark-theme: ();
+//
+
+html[data-theme='light'] {
+  background-color: #ffffff;
+  color: $color-text-normal;
+}
+
+html[data-theme='dark'] {
+  background-color: #000;
+}

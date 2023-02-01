@@ -1,0 +1,49 @@
+@import '../../styles/variables';
+
+.header {
+  position: fixed;
+  top: 0;
+  left: $left-pane-width;
+  right: 0;
+  height: 80px;
+  padding: 0 30px;
+  transition: left $side-menu-collapse-transition;
+  background-color: $header-background-color;
+  z-index: 100;
+  pointer-events: all;
+
+  .menu-btn {
+    transform: scale(1.3);
+    cursor: pointer;
+    fill: #a1a5b7;
+
+    .menu-btn-icon {
+      width: 20px;
+      height: auto;
+    }
+  }
+
+  .menu-btn:hover .menu-btn-icon {
+    fill: $color-primary-light;
+  }
+
+  .user-name {
+    font-size: 1rem;
+    font-weight: 500;
+    color: rgba($color: $color-black, $alpha: 0.9);
+  }
+
+  .avatar {
+  }
+
+  .logout-btn {
+  }
+}
+
+.header.menu-collapse {
+  left: $side-menu-collapse-width !important;
+}
+
+.header.menu-collapse .menu-btn-icon {
+  fill: $color-primary-light !important;
+}

@@ -1,0 +1,269 @@
+<div class="modal fade" id="templateModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="templateModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="templateModalLabel">{{ crudType === crudTypes.add ? 'New' : 'Edit' }} Template</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="resetForm()"></button>
+      </div>
+
+      <form [formGroup]="templateForm" (ngSubmit)="submitHandler()">
+        <div class="modal-body">
+          <!-- template name -->
+          <div class="d-flex flex-column mb-3">
+            <label for="template-form-name">
+              Name
+              <span class="form-required-sign">*</span>
+            </label>
+
+            <div class="d-flex flex-column">
+              <input
+                id="template-form-name"
+                class="form-control"
+                type="text"
+                formControlName="name"
+                name="name"
+                placeholder="Template name"
+                [ngClass]="getFieldClass('name')" />
+
+              <ul class="error-wrapper" *ngIf="!isFieldValid('name')">
+                <li *ngIf="name?.errors?.['required']">Template name is required.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- template url -->
+          <div class="d-flex flex-column mb-3">
+            <label for="template-form-url">
+              Url
+              <span class="form-required-sign">*</span>
+            </label>
+
+            <div class="d-flex flex-column">
+              <input
+                id="template-form-url"
+                class="form-control"
+                type="text"
+                formControlName="url"
+                name="url"
+                placeholder="Template url"
+                [ngClass]="getFieldClass('url')" />
+
+              <ul class="error-wrapper" *ngIf="!isFieldValid('url')">
+                <li *ngIf="url?.errors?.['required']">Url is required.</li>
+                <!-- <li *ngIf="url?.errors?.['pattern']">Url is invalid.</li> -->
+              </ul>
+            </div>
+          </div>
+
+          <!-- template description -->
+          <div class="d-flex flex-column mb-4">
+            <label for="template-form-description">Description</label>
+
+            <div class="d-flex flex-column">
+              <textarea
+                id="template-form-description"
+                class="form-control"
+                type="text"
+                name="description"
+                formControlName="description"
+                rows="3"
+                placeholder="Give a description">
+              </textarea>
+
+              <ul class="error-wrapper" *ngIf="!isFieldValid('description')"></ul>
+            </div>
+          </div>
+
+          <!-- template active state -->
+          <div class="d-flex flex-column mb-4">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" id="template-form-is-active" name="is_active" formControlName="is_active" />
+              <label class="form-check-label" for="template-form-is-active">Is Active? (Yes / No)</label>
+            </div>
+          </div>
+
+          <!-- template image -->
+          <div class="d-flex flex-column">
+            <label>Image</label>
+
+            <div class="d-flex flex-column">
+              <app-file-upload [formats]="['jpg', 'jpeg', 'png']" (fileChange)="onImageChange($event)"></app-file-upload>
+            </div>
+          </div>
+
+          <!-- template attributes -->
+          <div class="mt-5 mb-4" id="templates-attributes-div">
+            <div class="d-flex justify-content-between align-items-center">
+              <h6 class="heading-2">Template Attributes</h6>
+
+              <app-icon-btn
+                [text]="'New Attribute'"
+                [btnClasses]="'secondary-btn btn btn-sm'"
+                [isIcon]="false"
+                [iconClass]="'main-add-btn-icon'"
+                (btnClick)="openModal('#templateAttrModal')"></app-icon-btn>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <ng-container *ngIf="attributes && attributes && attributes.length > 0; else noAttributesDiv">
+              <div class="default-table">
+                <div class="table-responsive">
+                  <table class="table table-sm align-middle">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Active Status</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <ng-container *ngFor="let attr of attributes">
+                        <tr>
+                          <td>{{ attr.name || 'Not Available' }}</td>
+
+                          <td style="max-width: 12rem">{{ attr.description || 'Not Available' }}</td>
+
+                          <td>
+                            <span class="badge bg-success" *ngIf="attr.is_active === 1">Active</span>
+
+                            <span class="badge bg-danger" *ngIf="attr.is_active === 0">Deactive</span>
+                          </td>
+
+                          <td>
+                            <app-icon-btn
+                              [text]="''"
+                              [btnClasses]="'btn btn-sm btn-light me-2'"
+                              [iconName]="'edit'"
+                              [iconClass]="'secondary-update-btn-icon'"
+                              (btnClick)="openModal('#templateAttrModal', crudTypes.update, attr)"></app-icon-btn>
+
+                            <app-icon-btn
+                              [text]="''"
+                              [btnClasses]="'btn btn-sm btn-light'"
+                              [iconName]="'trash'"
+                              [iconClass]="'secondary-delete-btn-icon'"
+                              (btnClick)="deleteAttr(attr)"></app-icon-btn>
+                          </td>
+                        </tr>
+                      </ng-container>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </ng-container>
+
+            <ng-template #noAttributesDiv>
+              <div class="template-attr-no-data d-flex justify-content-center align-items-center py-5 px-3">
+                <span class="text-center">No template attributes are available!</span>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-bs-dismiss="modal" (click)="resetForm()">Cancel</button>
+
+          <app-icon-btn
+            [text]="crudType === crudTypes.add ? 'Add' : 'Save'"
+            [type]="'submit'"
+            [btnClasses]="'primary-btn btn'"
+            [iconName]="crudType === crudTypes.add ? 'plus' : 'edit'"
+            [iconClass]="crudType === crudTypes.add ? 'main-add-btn-icon' : 'main-update-btn-icon'"
+            [isLoading]="isLoading"></app-icon-btn>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- template attribute form modal -->
+<div class="modal fade" id="templateAttrModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="templateAttrModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="templateAttrModalLabel">{{ crudTypeAttr === crudTypes.add ? 'Add' : 'Edit' }} Attribute</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="resetForm(formTypes.attribute)"></button>
+      </div>
+
+      <form [formGroup]="templateAttributesForm" (ngSubmit)="addUpdateAttribute()">
+        <div class="modal-body">
+          <!-- template attribute name -->
+          <div class="d-flex flex-column mb-3">
+            <label for="template-attr-form-name">
+              Attribute Name
+              <span class="form-required-sign">*</span>
+            </label>
+
+            <div class="d-flex flex-column">
+              <input
+                id="template-attr-form-name"
+                class="form-control"
+                type="text"
+                formControlName="a_name"
+                name="a_name"
+                placeholder="Attribute name"
+                [ngClass]="getFieldClass('a_name', formTypes.attribute)" />
+
+              <ul class="error-wrapper" *ngIf="!isFieldValid('a_name', formTypes.attribute)">
+                <li *ngIf="a_name?.errors?.['required']">Name is required.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- template attribute description -->
+          <div class="d-flex flex-column mb-4">
+            <label for="template-attr-form-description"
+              >Attribute Description
+              <span class="form-required-sign">*</span>
+            </label>
+
+            <div class="d-flex flex-column">
+              <textarea
+                id="template-attr-form-description"
+                class="form-control"
+                type="text"
+                name="a_description"
+                formControlName="a_description"
+                rows="3"
+                placeholder="Give a description"
+                [ngClass]="getFieldClass('a_description', formTypes.attribute)">
+              </textarea>
+
+              <ul class="error-wrapper" *ngIf="!isFieldValid('a_description', formTypes.attribute)">
+                <li *ngIf="a_description?.errors?.['required']">Description is required.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- attribute active state -->
+          <div class="d-flex flex-column mb-4" *ngIf="displayAFIsActive">
+            <div class="form-check form-switch">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                role="switch"
+                id="template-attr-form-is-active"
+                name="a_is_active"
+                formControlName="a_is_active" />
+              <label class="form-check-label" for="template-attr-form-is-active">Is Active? (Yes / No)</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-bs-dismiss="modal" (click)="resetForm(formTypes.attribute)">Cancel</button>
+
+          <app-icon-btn
+            [text]="crudTypeAttr === crudTypes.add ? 'Add' : 'Save'"
+            [type]="'submit'"
+            [btnClasses]="'secondary-btn btn'"
+            [isIcon]="false"
+            [iconClass]="crudType === crudTypes.add ? 'main-add-btn-icon' : 'main-update-btn-icon'"></app-icon-btn>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
