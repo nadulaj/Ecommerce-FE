@@ -18,7 +18,7 @@ const routes: Routes = [
         component: DashboardComponent,
       },
       {
-        path: 'domains',
+        path: 'category',
         component: DomainsComponent,
       },
       {
@@ -26,7 +26,7 @@ const routes: Routes = [
         component: OrdersComponent,
       },
       {
-        path: 'templates',
+        path: 'items',
         component: TemplatesComponent,
       },
       {

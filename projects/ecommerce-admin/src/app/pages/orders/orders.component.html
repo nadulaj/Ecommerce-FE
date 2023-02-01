@@ -3,57 +3,16 @@
     <div class="mb-7">
       <div class="col d-flex justify-content-between align-items-center">
         <div class="d-flex flex-column justify-content-center">
-          <h2 class="heading-1">Categories</h2>
+          <h2 class="heading-1">Orders</h2>
   
           <app-breadcrumb></app-breadcrumb>
         </div>
   
-        <!-- <app-icon-btn
-          [text]="'New'"
-          [btnClasses]="'primary-btn btn'"
-          [iconName]="'plus'"
-          [iconClass]="'main-add-btn-icon'"
-          (btnClick)="openModal('#domainModal')"></app-icon-btn> -->
+
       </div>
     </div>
   
-    <!-- filter form -->
-    <!-- <div class="card mb-5">
-      <div class="card-body">
-        <form [formGroup]="filterForm" (ngSubmit)="pageChanged(1)">
-          <div class="row">
-            <div class="col-12 col-md-6 col-lg-4 col-xl-3 d-flex flex-column justify-content-start align-items-start">
-              <label class="col px-0" for="domain-filter-form-name">Name</label>
-  
-              <input class="col form-control" id="domain-filter-form-name" type="text" placeholder="Domain Name" formControlName="name" name="name" />
-            </div>
-  
-            <div class="col-12 col-md-6 col-lg-4 col-xl-3 d-flex flex-column justify-content-start align-items-start mt-3 mt-md-0">
-              <label class="col px-0" for="domain-filter-form-domain">Domain</label>
-  
-              <input class="col form-control" id="domain-filter-form-domain" type="text" placeholder="Domain" formControlName="domain" name="domain" />
-            </div>
-  
-            <div class="col-12 col-md-6 col-lg-4 col-xl-3 d-flex flex-column justify-content-start align-items-start mt-3 mt-lg-0">
-              <label class="col px-0">Active Status</label>
-  
-              <select class="col form-select" formControlName="is_active" name="is_active">
-                <option value="" disabled>...</option>
-                <option value="1">Active</option>
-                <option value="0">Deactive</option>
-              </select>
-            </div>
-  
-            <div class="col d-flex justify-content-end justify-content-xxl-start align-items-end mt-3">
-              <button class="secondary-btn me-2 btn" type="submit">Filter</button>
-  
-              <button class="btn btn-light" type="button" (click)="clearFilterForm()">Clear</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div> -->
-  
+
     <!-- table -->
     <div class="d-flex flex-column">
       <div class="card">
@@ -63,14 +22,22 @@
           </div>
   
           <ng-container *ngIf="!isLoading; else loadingDiv">
-            <ng-container *ngIf="domains">
+            <ng-container *ngIf="orders">
               <div class="default-table">
                 <div class="table-responsive">
                   <table class="table table-sm align-middle">
                     <thead>
                       <tr>
                         <th>ID</th>
-                        <th>Category Name</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Street Address</th>
+                        <th>City</th>
+                        <th>Zip Code</th>
+                        <th>Country</th>
+                        <th>Mobile No</th>
+                        <th>Email</th>
+                        <th>Order Note</th>
                         <!-- <th>Description</th>
                         <th>Active Status</th>
                         <th>Actions</th> -->
@@ -78,13 +45,45 @@
                     </thead>
   
                     <tbody>
-                      <ng-container *ngFor="let domain of domains">
+                      <ng-container *ngFor="let order of orders">
                         <tr>
-                          <td>{{ domain._id || 'Not Available' }}</td>
+                          <td>{{ order._id || 'Not Available' }}</td>
   
                           <td class="table-td-light">
-                            {{ domain.name || 'Not Available' }}
+                            {{ order.customer_first_name || 'Not Available' }}
                           </td>
+                          <td class="table-td-light">
+                            {{ order.customer_last_name || 'Not Available' }}
+                          </td>
+  
+                          <td class="table-td-light">
+                            {{ order.customer_street_address || 'Not Available' }}
+                          </td>
+
+                          <td class="table-td-light">
+                            {{ order.customer_city || 'Not Available' }}
+                          </td>
+
+                          <td class="table-td-light">
+                            {{ order.customer_zip_code || 'Not Available' }}
+                          </td>
+
+                          <td class="table-td-light">
+                            {{ order.customer_country || 'Not Available' }}
+                          </td>
+
+                          <td class="table-td-light">
+                            {{ order.customer_mobile_no || 'Not Available' }}
+                          </td>
+
+                          <td class="table-td-light">
+                            {{ order.customer_email || 'Not Available' }}
+                          </td>
+
+                          <td class="table-td-light">
+                            {{ order.order_note || 'Not Available' }}
+                          </td>
+  
   
                           <!-- <td class="table-td-light" style="max-width: 10rem">{{ domain.description || 'Not Available' }}</td>
   

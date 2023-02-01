@@ -9,12 +9,12 @@ export const MENU_ITEMS: MenuItemType[] = [
   {
     title: 'Categories',
     icon: 'globe',
-    route: '/pages/domains',
+    route: '/pages/category',
   },
   {
     title: 'Items',
     icon: 'layers',
-    route: '/pages/templates',
+    route: '/pages/items',
   },
   {
     title: 'Orders',

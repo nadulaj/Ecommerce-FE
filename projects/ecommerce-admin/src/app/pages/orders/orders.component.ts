@@ -14,8 +14,7 @@ import { CRUD_TYPES } from '../../keys';
 export class OrdersComponent implements OnInit {
   crudTypes = CRUD_TYPES;
   crudType = CRUD_TYPES.add;
-  domains: any[] = [];
-  domainCount: number = 0;
+  orders: any[] = [];
   isLoading: boolean = false;
   isRequesting: boolean = false;
   activeModalId: string = '';
@@ -40,7 +39,7 @@ export class OrdersComponent implements OnInit {
 
         if (res) {
           if (res) {
-            this.domains = res;
+            this.orders = res;
           } else {
             this.toastr.error('Oh Snap!', 'Getting domain details failed');
           }
