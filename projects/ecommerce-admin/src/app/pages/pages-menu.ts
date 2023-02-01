@@ -16,6 +16,11 @@ export const MENU_ITEMS: MenuItemType[] = [
     icon: 'layers',
     route: '/pages/templates',
   },
+  {
+    title: 'Orders',
+    icon: 'layers',
+    route: '/pages/orders',
+  },
   // {
   //   title: 'Heading 1',
   //   heading: true,

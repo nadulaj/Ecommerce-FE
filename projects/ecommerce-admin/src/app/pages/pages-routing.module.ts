@@ -6,6 +6,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DomainsComponent } from './domains/domains.component';
 import { TemplatesComponent } from './templates/templates.component';
+import { OrdersComponent } from './orders/orders.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
       {
         path: 'domains',
         component: DomainsComponent,
+      },
+      {
+        path: 'orders',
+        component: OrdersComponent,
       },
       {
         path: 'templates',

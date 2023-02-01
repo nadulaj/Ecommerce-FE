@@ -14,6 +14,7 @@ import { DomainsComponent } from './domains/domains.component';
 import { TemplatesComponent } from './templates/templates.component';
 import { ComponentModule } from '../components/component.module';
 import { TemplateFormComponent } from './templates/template-form/template-form.component';
+import { OrdersComponent } from './orders/orders.component';
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import { TemplateFormComponent } from './templates/template-form/template-form.c
     DomainsComponent,
     TemplatesComponent,
     TemplateFormComponent,
+    OrdersComponent,
   ],
   exports: [],
 })
